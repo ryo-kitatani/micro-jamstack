@@ -34,3 +34,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
     </main>
   );
 }
+
+export async function generateStaticParams() {
+  const contentIds = await client.getAllContentIds({ endpoint: 'blog' });
+
+  return contentIds.map((contentId) => ({
+    id: contentId, // 各記事のIDをパラメータとして返す
+  }));
+}
